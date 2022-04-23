@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using SampSharp.Core;
 using SampSharp.GameMode;
@@ -29,9 +30,15 @@ public class GameMode : BaseMode
         base.OnInitialized(e);
 
         Client.UnhandledException += (_, args) => Console.WriteLine($"ERROR! {args.Exception}");
-
+        
         Console.WriteLine("The game mode has loaded.");
-
+        var category = VehicleCategory.Station;
+        var vehicles = VehicleModelInfo.GetAllVehicles(category);
+        Console.WriteLine($"VehicleCategory {category}, Count: {vehicles.Count()}");
+        foreach(var data in vehicles)
+        {
+            Console.WriteLine(data.Type);
+        }
         AddPlayerClass(0, new Vector3(1482.9055, 1504.2122, 10.5474), 0);
 
         BaseVehicle.Create(VehicleModelType.BF400, new Vector3(1489.9055, 1520.2122, 11), 0, 3, 3);

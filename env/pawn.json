@@ -12,7 +12,7 @@
 		"announce": false,
 		"lanmode": false,
 		"rcon": true,
-		"rcon_password": "sampsharp",
+		"rcon_password": "123",
 		"extra": {
 			"gamemode0": "empty",
 			"plugins": "sampsharp"

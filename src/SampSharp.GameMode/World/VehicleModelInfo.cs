@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using SampSharp.GameMode.Definitions;
 
@@ -164,17 +165,21 @@ public readonly partial struct VehicleModelInfo
         {
             throw new ArgumentOutOfRangeException(nameof(vehicle), "vehicle's model is non-existant");
         }
-
+         
         return _vehicleModelInfos[model - 400];
     }
 
-    /// <summary>Returns an array of <see cref="VehicleModelType" /> containing information about the type of vehicle models.</summary>
-    /// <param name="category">The category.</param>
-    /// <returns>An array of <see cref="VehicleModelType" /> containing information about the type of vehicle models.</returns>
-    public static VehicleModelType[] GetAllVehiclesModelType(VehicleCategory category)
+    /// <summary>Returns an IEnumerable of <see cref="VehicleModelInfo" /> containing information about the all vehicles.</summary>
+    /// <param name="category">The category to find the vehicles.</param>
+    /// <returns>An IEnumerable of <see cref="VehicleModelInfo" /> containing information about the all vehicles.</returns>
+    public static IEnumerable<VehicleModelInfo> GetAllVehicles(VehicleCategory category)
     {
-        return _vehicleModelInfos.Where(modelInfo => modelInfo.Category == category)
-                                 .Select(modelInfo => modelInfo.Type).ToArray();
+        if ((int)category < 1 || (int)category > 16)
+        {
+            throw new ArgumentOutOfRangeException(nameof(category), "category is non-existant");
+        }
+
+        return _vehicleModelInfos.Where(modelInfo => modelInfo.Category == category);
     }
 
     /// <summary>Returns an instance of <see cref="VehicleModelInfo" /> containing information about the given <see cref="VehicleModelType" />.</summary>

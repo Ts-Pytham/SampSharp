@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using SampSharp.GameMode.Definitions;
 using SampSharp.GameMode.Display;
 using SampSharp.GameMode.SAMP;
@@ -47,6 +48,7 @@ internal static class DialogCommands
         };
         inputDialog.Show(player);
     }
+
 
     [Command("listdialog")]
     public static void ListDialogHelpCommand(BasePlayer player)
@@ -211,7 +213,7 @@ internal static class DialogCommands
             }
 
             [Command("item-async")]
-            public static async void ListDialogItemTestCommandAsync(BasePlayer player)
+            public static async Task ListDialogItemTestCommandAsync(BasePlayer player)
             {
                 var listDialog = new ListDialog<ColorValue>("Colors", "Select", "Close");
                 listDialog.AddItem(new ColorValue(Color.Red));
