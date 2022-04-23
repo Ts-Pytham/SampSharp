@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Linq;
 using SampSharp.GameMode.Definitions;
 
 // ReSharper disable StringLiteralTypo
@@ -165,6 +166,15 @@ public readonly partial struct VehicleModelInfo
         }
 
         return _vehicleModelInfos[model - 400];
+    }
+
+    /// <summary>Returns an array of <see cref="VehicleModelType" /> containing information about the type of vehicle models.</summary>
+    /// <param name="category">The category.</param>
+    /// <returns>An array of <see cref="VehicleModelType" /> containing information about the type of vehicle models.</returns>
+    public static VehicleModelType[] GetAllVehiclesModelType(VehicleCategory category)
+    {
+        return _vehicleModelInfos.Where(ModelInfo => ModelInfo.Category == category)
+                                 .Select(ModelInfo => ModelInfo.Type).ToArray();
     }
 
     /// <summary>Returns an instance of <see cref="VehicleModelInfo" /> containing information about the given <see cref="VehicleModelType" />.</summary>
